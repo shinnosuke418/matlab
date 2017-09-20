@@ -3,8 +3,8 @@ num=50;%‰æ‘œ‚Ì—Ê‚Å•ÏX
 imcell2=cell(1,num);
 t_cell=cell(1,num);
 j_cell=cell(1,num);
-se_bo  = strel('disk', 3); %–c’£—p (disk:‰~”Õó‚Ì”¼Œa)
-se_shu = strel('disk', 3); %ûk—p (disk:‰~”Õó‚Ì”¼Œa)
+se_bo  = strel('disk', 1); %–c’£—p (disk:‰~”Õó‚Ì”¼Œa)
+se_shu = strel('disk', 1); %ûk—p (disk:‰~”Õó‚Ì”¼Œa)
 
 %‰æ‘œ‚Ì“Ç‚İ‚İ(˜A”Ôƒtƒ@ƒCƒ‹‚É‚·‚é)
 for i=1:num
@@ -29,11 +29,11 @@ for i=2:num
    
    t_cell{1,i}=make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A);
    %GIFilter&opening.ver
-   if i==10||20||30||40||50
+   if rem(i,10)==0
        t_cell{1,i} = imerode(t_cell{1,i}, se_shu); %ûk(imerode)
        t_cell{1,i} = imerode(t_cell{1,i}, se_bo); %–c’£(imdilate)
+       t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
    end
-   t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);   
    j_cell{1,i} = get_radiance(imcell2{1,i}, t_cell{1,i}, A);
    
    imgname=strcat('result\J\J',num2str(i),'.bmp');

@@ -28,7 +28,7 @@ for i=2:num
    %メディアンフィルタver
    %t_cell{1,i}=medfilt2(make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A));
    %GIFilter.ver
-   %t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
+   t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
    j_cell{1,i} = get_radiance(imcell2{1,i}, t_cell{1,i}, A);
    
    imgname=strcat('result\J\J',num2str(i),'.bmp');
