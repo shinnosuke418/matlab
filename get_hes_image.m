@@ -13,7 +13,7 @@ Ax = get_atmosphere(I, dark_channel);
 trans_est = get_transmission_estimate(I, Ax, omega, win_size);
 tx = guided_filter(rgb2gray(I), trans_est, r, res);
 
-imgname=strcat('testimage\p4\',num2str(idx),'.bmp');
+imgname=strcat('result\het\',num2str(idx),'.bmp');
 imwrite(tx, imgname);
 result = get_radiance(I, tx, Ax);
 

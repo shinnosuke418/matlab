@@ -5,12 +5,13 @@ R = J(:,:,1)-A(1);
 G = J(:,:,2)-A(2);
 B = J(:,:,3)-A(3);
 D2 = cat(3,R,G,B);
+
 % eps = 5;
-%eps = 10^(-1);
-idx_p = D2>=0 & D2<eps;
-idx_n = D2<0 & D2>-eps;
-D2(idx_p) = eps;
-D2(idx_n) = -eps;
+% eps = 10^(-1);
+% idx_p = D2>=0 & D2<eps;
+% idx_n = D2<0 & D2>-eps;
+% D2(idx_p) = eps;
+% D2(idx_n) = -eps;
 
 D=D1./D2;
 

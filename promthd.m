@@ -7,15 +7,14 @@ j_cell=cell(1,num);
 %画像の読み込み(連番ファイルにする)
 for i=1:num
     %Imgfilename = strcat('live3\',num2str(i),'.bmp');
-    Imgfilename = strcat('data\data10\',num2str(i),'.bmp');
+    Imgfilename = strcat('data\data8\',num2str(i),'.bmp');
     imcell2{1,i}=double(imread(Imgfilename))/255;
-    %imcell2{1,i}=imresize(imcell2{1,i},0.4);
 end
 %****************make he's process***********************
 omega = 0.8;
 win_size = 6;
 r = 15;
-res = 0.001;
+res = 0.000001;
 A=make_A(imcell2{1,1}, win_size);
 trans_est = get_transmission_estimate(imcell2{1,1}, A, omega, win_size);
 t = guided_filter(rgb2gray(imcell2{1,1}), trans_est, r, res);
