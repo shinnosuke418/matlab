@@ -12,8 +12,8 @@ for i=1:num
 end
 %****************make he's process***********************
 omega = 0.8;
-win_size = 6;
-r = 15;
+win_size = 15;
+r = 6;
 res = 0.000001;
 A=make_A(imcell2{1,1}, win_size);
 trans_est = get_transmission_estimate(imcell2{1,1}, A, omega, win_size);
@@ -25,9 +25,7 @@ j_cell{1,1} = get_radiance(imcell2{1,2}, t_cell{1,1}, A);
 for i=2:num
    
    t_cell{1,i}=make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A);
-   %メディアンフィルタver
-   %t_cell{1,i}=medfilt2(make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A));
-   %GIFilter.ver
+
    t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
    j_cell{1,i} = get_radiance(imcell2{1,i}, t_cell{1,i}, A);
    

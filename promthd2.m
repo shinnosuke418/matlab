@@ -29,7 +29,7 @@ for i=2:num
    
    t_cell{1,i}=make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A);
    %GIFilter&opening.ver
-   if rem(i,10)==0
+   if rem(i,3)==0
        t_cell{1,i} = imerode(t_cell{1,i}, se_shu); %é˚èk(imerode)
        t_cell{1,i} = imerode(t_cell{1,i}, se_bo); %ñcí£(imdilate)
        t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
