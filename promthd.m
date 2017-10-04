@@ -34,4 +34,5 @@ for i=2:num
    imgname2=strcat('result\T\T',num2str(i),'.bmp');
    imwrite(t_cell{1,i}, imgname2);
 end
+
 toc;
