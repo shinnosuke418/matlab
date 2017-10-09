@@ -28,12 +28,13 @@ j_cell{1,1} = get_radiance(imcell2{1,2}, t_cell{1,1}, A);
 for i=2:num
    
    t_cell{1,i}=make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A);
+   t_cell{1,i} = guided_filter(rgb2gray(j_cell{1,i}), t_cell{1,i}, r, res);
    %GIFilter&opening.ver
-   if rem(i,3)==0
-       t_cell{1,i} = imerode(t_cell{1,i}, se_shu); %é˚èk(imerode)
-       t_cell{1,i} = imerode(t_cell{1,i}, se_bo); %ñcí£(imdilate)
-       t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
-   end
+%    if rem(i,3)==0
+%        t_cell{1,i} = imerode(t_cell{1,i}, se_shu); %é˚èk(imerode)
+%        t_cell{1,i} = imerode(t_cell{1,i}, se_bo); %ñcí£(imdilate)
+%        t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);
+%    end
    j_cell{1,i} = get_radiance(imcell2{1,i}, t_cell{1,i}, A);
    
    imgname=strcat('result\J\J',num2str(i),'.bmp');
