@@ -1,14 +1,20 @@
 tic;
-num=60;%画像の量で変更
-imcell2=cell(1,num);
-t_cell=cell(1,num);
-j_cell=cell(1,num);
+clearvars;
+close all;
+frame=60;%画像の量で変更
+imcell2=cell(1,frame);
+t_cell=cell(1,frame);
+j_cell=cell(1,frame);
 
-%画像の読み込み(連番ファイルにする)
-for i=1:num
-%     Imgfilename = strcat('live4\',num2str(i),'.bmp');
-     Imgfilename = strcat('data\data8\',num2str(i),'.bmp');
-    imcell2{1,i}=double(imread(Imgfilename))/255;
+mycam=webcam('Logicool HD Pro Webcam C920');
+mycam.set('Resolution','960x720');
+
+%画像の読み込み
+for i=1:frame
+    img=snapshot(mycam);
+    imcell2{1,i}=double(img)/255;
+    imgname3=strcat('result\cam\',num2str(i),'.bmp');
+    imwrite(imcell2{1,i}, imgname3);
 end
 %****************make he's process***********************
 omega = 0.9;
@@ -22,7 +28,7 @@ J = get_radiance(imcell2{1,1}, t, A);
 %*******************************************************
 t_cell{1,1}=make_t1(t,J,imcell2{1,1},imcell2{1,2},A);
 j_cell{1,1} = get_radiance(imcell2{1,2}, t_cell{1,1}, A);
-for i=2:num
+for i=2:frame
    t_cell{1,i}=make_t1(t_cell{1,i-1},j_cell{1,i-1},imcell2{1,i-1},imcell2{1,i},A);
 
    t_cell{1,i} = guided_filter(rgb2gray(imcell2{1,i}), t_cell{1,i}, r, res);

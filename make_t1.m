@@ -6,6 +6,8 @@ G = J(:,:,2)-A(2);
 B = J(:,:,3)-A(3);
 D2 = cat(3,R,G,B);
 
+% D2=rgb2gray(J)-(R+G+B);
+
 
 % eps = 10^(-1)*6;
 % idx_p = D2>=0 & D2<eps;
@@ -19,10 +21,10 @@ result=rgb2gray(cat(3, t, t, t)+D);
 
 % result = t + rgb2gray(D);
 
-msk1=result>1;
-msk0=result<0;
-result(msk1)=1;
-result(msk0)=0;
+% msk1=result>1;
+% msk0=result<0;
+% result(msk1)=1;
+% result(msk0)=0;
 
 end
 
